@@ -30,7 +30,7 @@ class Car1{
     }
 }
 
-class Frame{}
+//class Frame{}
 
 //파일명은 반드시 main 있는 클래스 명으로 선언을 해야하고 다른 클래스(car1) public 붙이면 안됨
 public class CarEx1 {

@@ -23,5 +23,7 @@ public class ThisEx1 {
         String t4 = t3;
         System.out.println(t3);
         System.out.println(t4);
+
+        This2 t2 = new This2();
     }
 }
