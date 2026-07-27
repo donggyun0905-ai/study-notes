@@ -1,3 +1,6 @@
+### JDK ###
+jdk-24/
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/
