@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>강동균 | Data Engineer Portfolio</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- 01. Hero / 타이틀 -->
+    <section id="hero" class="section section--hero">
+        <div class="hero__content">
+            <h1 class="hero__name"><span class="hero__name-initial">K</span>angDongGyun</h1>
+            <div class="hero__fade"></div>
+            <h1 class="hero__role"><a id="hero__data">Data</a> Engineer</h1>
+        </div>
+        <div class="scroll-indicator">
+            <span class="scroll-indicator__text">SCROLL</span>
+            <span class="scroll-indicator__arrow"></span>
+        </div>
+    </section>
+
+    <!-- 02. 목차 -->
+    <section id="toc" class="section section--toc">
+        <div class="toc__eyebrow">CONTENTS</div>
+        <nav class="toc__list">
+            <a href="#tech-stack" class="toc__item">
+                <span class="toc__idx">01</span>
+                <span class="toc__title">
+                    <span class="toc__title-spacer" aria-hidden="true">기술 스택</span>
+                    <span class="toc__title-stroke" aria-hidden="true">기술 스택</span>
+                    <span class="toc__title-wave">기술 스택</span>
+                </span>
+                <span class="toc__en">TECH STACK</span>
+            </a>
+            <a href="#projects-summary" class="toc__item">
+                <span class="toc__idx">02</span>
+                <span class="toc__title">
+                    <span class="toc__title-spacer" aria-hidden="true">프로젝트 요약</span>
+                    <span class="toc__title-stroke" aria-hidden="true">프로젝트 요약</span>
+                    <span class="toc__title-wave">프로젝트 요약</span>
+                </span>
+                <span class="toc__en">PROJECTS</span>
+            </a>
+            <a href="#projects-detail" class="toc__item">
+                <span class="toc__idx">03</span>
+                <span class="toc__title">
+                    <span class="toc__title-spacer" aria-hidden="true">프로젝트 상세</span>
+                    <span class="toc__title-stroke" aria-hidden="true">프로젝트 상세</span>
+                    <span class="toc__title-wave">프로젝트 상세</span>
+                </span>
+                <span class="toc__en">DETAIL</span>
+            </a>
+            <a href="#closing" class="toc__item">
+                <span class="toc__idx">04</span>
+                <span class="toc__title">
+                    <span class="toc__title-spacer" aria-hidden="true">마무리</span>
+                    <span class="toc__title-stroke" aria-hidden="true">마무리</span>
+                    <span class="toc__title-wave">마무리</span>
+                </span>
+                <span class="toc__en">CLOSING</span>
+            </a>
+        </nav>
+    </section>
+
+    <!-- 03-04. 기술 스택 -->
+    <section id="tech-stack" class="section section--tech-stack">
+        <div class="tech-stack__inner">
+            <div class="tech-stack__layout">
+
+                <div class="tech-stack__cards">
+
+                    <div class="tech-card" style="--tilt: -8deg;">
+                        <span class="tech-card__drop" style="left:18%; --dx:-22px;"></span>
+                        <span class="tech-card__drop" style="left:70%; --dx:26px;"></span>
+                        <div class="tech-card__inner">
+                            <span class="tech-card__chip tech-card__chip--green">LANGUAGE</span>
+                            <div class="tech-card__desc-label">Description :</div>
+                            <p class="tech-card__desc">파이프라인 개발과 데이터 검증의 기본 도구. 처리 로직은 Python으로, 집계와 마트 설계는 SQL로 다룹니다.</p>
+                            <div class="tech-card__tags"><span>Python</span><span>SQL</span><span>Java</span></div>
+                            <div class="tech-card__btns">
+                                <a class="tech-card__btn tech-card__btn--git" href="#" target="_blank" rel="noopener">Git</a>
+                                <a class="tech-card__btn tech-card__btn--yt" href="#" target="_blank" rel="noopener">Youtube</a>
+                            </div>
+                        </div>
+                        <div class="tech-card__pop">
+                            <div class="tech-card__pop-label">SMALL PROJECT</div>
+                            <div class="tech-card__pop-media">영상 / GIF 자리</div>
+                            <p>이 기술을 터득하기 위해 진행한 스몰 프로젝트 소개가 들어갑니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-card" style="--tilt: 7deg;">
+                        <span class="tech-card__drop" style="left:22%; --dx:-20px;"></span>
+                        <span class="tech-card__drop" style="left:66%; --dx:24px;"></span>
+                        <div class="tech-card__inner">
+                            <span class="tech-card__chip tech-card__chip--orange">DATA PROCESSING</span>
+                            <div class="tech-card__desc-label">Description :</div>
+                            <p class="tech-card__desc">배치 처리와 워크플로 오케스트레이션 중심. 스트림 수집 구조를 학습하며 프로젝트에 적용해왔습니다.</p>
+                            <div class="tech-card__tags"><span>Spark</span><span>Airflow</span><span>Kafka</span></div>
+                            <div class="tech-card__btns">
+                                <a class="tech-card__btn tech-card__btn--git" href="#" target="_blank" rel="noopener">Git</a>
+                                <a class="tech-card__btn tech-card__btn--yt" href="#" target="_blank" rel="noopener">Youtube</a>
+                            </div>
+                        </div>
+                        <div class="tech-card__pop">
+                            <div class="tech-card__pop-label">SMALL PROJECT</div>
+                            <div class="tech-card__pop-media">영상 / GIF 자리</div>
+                            <p>이 기술을 터득하기 위해 진행한 스몰 프로젝트 소개가 들어갑니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-card" style="--tilt: -8deg;">
+                        <span class="tech-card__drop" style="left:20%; --dx:-24px;"></span>
+                        <span class="tech-card__drop" style="left:72%; --dx:22px;"></span>
+                        <div class="tech-card__inner">
+                            <span class="tech-card__chip tech-card__chip--silver">STORAGE</span>
+                            <div class="tech-card__desc-label">Description :</div>
+                            <p class="tech-card__desc">원천 데이터는 오브젝트 스토리지에, 분석용 데이터는 RDB·웨어하우스에 계층적으로 적재하는 구조를 다룹니다.</p>
+                            <div class="tech-card__tags"><span>S3</span><span>PostgreSQL</span><span>Redshift</span></div>
+                            <div class="tech-card__btns">
+                                <a class="tech-card__btn tech-card__btn--git" href="#" target="_blank" rel="noopener">Git</a>
+                                <a class="tech-card__btn tech-card__btn--yt" href="#" target="_blank" rel="noopener">Youtube</a>
+                            </div>
+                        </div>
+                        <div class="tech-card__pop">
+                            <div class="tech-card__pop-label">SMALL PROJECT</div>
+                            <div class="tech-card__pop-media">영상 / GIF 자리</div>
+                            <p>이 기술을 터득하기 위해 진행한 스몰 프로젝트 소개가 들어갑니다.</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-card" style="--tilt: 7deg;">
+                        <span class="tech-card__drop" style="left:16%; --dx:-20px;"></span>
+                        <span class="tech-card__drop" style="left:68%; --dx:26px;"></span>
+                        <div class="tech-card__inner">
+                            <span class="tech-card__chip tech-card__chip--green">INFRA &amp; OPS</span>
+                            <div class="tech-card__desc-label">Description :</div>
+                            <p class="tech-card__desc">컨테이너 기반 배포와 CI 파이프라인으로 재현 가능한 환경을 만드는 데 집중합니다.</p>
+                            <div class="tech-card__tags"><span>Docker</span><span>AWS</span><span>GitHub Actions</span></div>
+                            <div class="tech-card__btns">
+                                <a class="tech-card__btn tech-card__btn--git" href="#" target="_blank" rel="noopener">Git</a>
+                                <a class="tech-card__btn tech-card__btn--yt" href="#" target="_blank" rel="noopener">Youtube</a>
+                            </div>
+                        </div>
+                        <div class="tech-card__pop">
+                            <div class="tech-card__pop-label">SMALL PROJECT</div>
+                            <div class="tech-card__pop-media">영상 / GIF 자리</div>
+                            <p>이 기술을 터득하기 위해 진행한 스몰 프로젝트 소개가 들어갑니다.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="tech-stack__display" aria-hidden="true">
+                    <span>Portfolio</span>
+                    <span>Tech</span>
+                    <span>Stack</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 05. 프로젝트 성장 과정 요약 -->
+    <section id="projects-summary" class="section section--projects-summary">
+        <div class="projects-summary__inner">
+            <div class="projects-summary__center" id="growthCenter">Projects</div>
+
+            <div class="timeline">
+                <div class="timeline__thread"></div>
+                <div class="timeline__thread-fill" id="gThreadFill"></div>
+
+                <div class="timeline__item reveal">
+                    <div class="timeline__knot"></div>
+                    <div class="timeline__year">2026</div>
+                    <h3>다티부스 — 메인 프로젝트</h3>
+                    <p>가장 깊게 판 프로젝트. 파이프라인 설계부터 트러블슈팅, 성과 측정, 개발일지까지 전 과정을 담았습니다.</p>
+                    <a class="timeline__go" href="#project-datibus">상세 보기 ↓</a>
+                </div>
+
+                <div class="timeline__item reveal">
+                    <div class="timeline__knot"></div>
+                    <div class="timeline__year">2025</div>
+                    <h3>헬스케어 — 서브 프로젝트</h3>
+                    <p>온디바이스(Android) 환경의 제약 속에서 데이터를 수집하고 다루는 법을 배운 프로젝트.</p>
+                    <a class="timeline__go" href="#project-healthcare">상세 보기 ↓</a>
+                </div>
+
+                <div class="timeline__item reveal">
+                    <div class="timeline__knot"></div>
+                    <div class="timeline__year">2024</div>
+                    <h3>맑은 날씨 — 처음 프로젝트</h3>
+                    <p>공공데이터로 처음 파이프라인을 만들어본, 모든 것의 출발점.</p>
+                    <a class="timeline__go" href="#project-clear-weather">상세 보기 ↓</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06-08. 프로젝트 상세 -->
+    <section id="projects-detail" class="section section--projects-detail">
+
+        <!-- 메인 프로젝트 -->
+        <article id="project-datibus" class="project-detail project-detail--main reveal">
+            <div class="project-detail__head">
+                <span class="project-detail__badge project-detail__badge--main">MAIN PROJECT</span>
+                <span class="project-detail__year">2026</span>
+            </div>
+            <h3 class="project-detail__label">메인 프로젝트</h3>
+            <h2 class="project-detail__name">Dativus</h2>
+            <p class="project-detail__one-liner">보안과 비용을 동시에 잡은 "팀 전용 AI 팀원" 플랫폼</p>
+            <div class="project-detail__meta">
+                <span>기간 : 2026.00 — 2026.00</span>
+                <span>역할 : 단독 / 팀 (팀으로 진행하다 단독으로 진행하는 만큼 설명이 필요할듯?)</span>
+            </div>
+            <div class="project-detail__tags"><span>Python</span><span>Spark</span><span>Airflow</span><span>S3</span><span>PostgreSQL</span></div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">PROBLEM + ARCHITECTURE</span>
+                <p>이전 상황 — 어떤 비효율/문제가 있었는지 수치와 함께 서술하기 </p>
+                <div class="project-detail__arch-box">전체 아키텍처 다이어그램 자리<br>(데이터 흐름 그림, 텍스트 최소화)</div>
+            </div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">KEY DECISIONS</span>
+                <ul>
+                    <li>왜 이 기술을 선택했는지 — 대안(A) 대신 (B)를 쓴 이유</li>
+                    <li>파티셔닝 / 스키마 설계 등 구조적 판단</li>
+                </ul>
+            </div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">TROUBLESHOOTING + 성과</span>
+                <ul>
+                    <li>실제 겪은 문제 ① — 원인 분석 → 조치 → 결과</li>
+                    <li>실제 겪은 문제 ② — 원인 분석 → 조치 → 결과</li>
+                </ul>
+                <div class="project-detail__metrics">
+                    <div class="project-detail__metric"><div class="project-detail__metric-v">00 → 00</div><div class="project-detail__metric-l">지연 시간</div></div>
+                    <div class="project-detail__metric"><div class="project-detail__metric-v">N건</div><div class="project-detail__metric-l">일 처리량</div></div>
+                    <div class="project-detail__metric"><div class="project-detail__metric-v">00%↓</div><div class="project-detail__metric-l">비용</div></div>
+                </div>
+            </div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">DEV LOG — 시행착오의 기록</span>
+                <div class="project-detail__devlog">
+                    <div class="project-detail__devlog-item"><span class="project-detail__devlog-wk">1주차</span><p>고도의 하드웨어 요구조건에 대한 문제</p></div>
+                    <div class="project-detail__devlog-item"><span class="project-detail__devlog-wk">2주차</span><p>로컬 AI의 불정확한 라우팅에 대한 문제</p></div>
+                    <div class="project-detail__devlog-item"><span class="project-detail__devlog-wk">3주차</span><p>빅데이터의 부재</p></div>
+                </div>
+            </div>
+        </article>
+
+        <!-- 서브 프로젝트 -->
+        <article id="project-healthcare" class="project-detail project-detail--sub reveal">
+            <div class="project-detail__head">
+                <span class="project-detail__badge project-detail__badge--sub">SUB PROJECT</span>
+                <span class="project-detail__year">2025</span>
+            </div>
+            <h3 class="project-detail__label">서브 프로젝트</h3>
+            <h2 class="project-detail__name">헬스케어</h2>
+            <p class="project-detail__one-liner">온디바이스 환경의 제약 속에서 유실 없는 데이터 수집 구조를 설계</p>
+            <div class="project-detail__meta">
+                <span>기간 : 2025.00 — 2025.00</span>
+                <span>역할 : </span>
+            </div>
+            <div class="project-detail__tags"><span>Android</span><span>Kotlin</span><span>Room</span><span>WorkManager</span></div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">BACKGROUND</span>
+                <p>왜 온디바이스/모바일 데이터를 다뤘는지 — 이유를 적되 노션에 정리된 개발일지는 다 대거 수정하고 적자!</p>
+            </div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">DESIGN DECISIONS + RESULT</span>
+                <ul>
+                    <li>배치 업로드 주기 — 배터리 소모와 데이터 최신성 사이의 트레이드오프</li>
+                    <li>로컬 캐싱 — 저장공간 제약 하에서의 보관/삭제 정책</li>
+                    <li>오프라인 대응 — 네트워크 불안정 시 재전송 로직</li>
+                </ul>
+                <p class="project-detail__result">결과 : 작년에 작성한 데이터 다이어그램과 그래프 넣을 것 (프로젝트의 수정 이후에!)</p>
+            </div>
+        </article>
+
+        <!-- 처음 프로젝트 -->
+        <article id="project-clear-weather" class="project-detail project-detail--first reveal">
+            <div class="project-detail__head">
+                <span class="project-detail__badge project-detail__badge--first">FIRST PROJECT</span>
+                <span class="project-detail__year">2024</span>
+            </div>
+            <h3 class="project-detail__label">처음 프로젝트</h3>
+            <h2 class="project-detail__name">맑은 출근길</h2>
+            <div class="project-detail__meta">
+                <span>기간 : 2024.00 — 2024.00</span>
+                <span>사용 데이터 : 기상청 공공데이터</span>
+            </div>
+
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">계기</span>
+                <p>왜 시작했는지 한 줄(자발성을 보여줘야됨)</p>
+            </div>
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">핵심 기술 선택 이유</span>
+                <p>어떤 기술을 왜 골랐는지 1~2줄로 압축하기</p>
+            </div>
+            <div class="project-detail__block">
+                <span class="project-detail__block-label">결과 · 배운 점</span>
+                <p>배운 점 또는 간단한 성과 지표. (이 프로젝트가 이후 프로젝트들의 출발점이 되었다는 연결로 마무리하는 느낌으로 진행)</p>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- 09. 마무리 멘트 -->
+    <section id="closing" class="section section--closing">
+        <div class="closing__content reveal">
+            <div class="closing__band"><span class="closing__q">WHY?</span> 로 시작한 과거를</div>
+            <div class="closing__lines"><span class="closing__u">하루하루 쌓아 미래로</span><br>만들어가겠습니다</div>
+            <div class="closing__de">Data Engineer</div>
+            <div class="closing__sign">강동균 입니다.</div>
+        </div>
+    </section>
+
+    <!-- 10. 마지막 하이라이트 / 지원서 -->
+    <section id="application" class="section section--application">
+        <div class="application__inner">
+
+            <div class="application__msg reveal">
+                <h2>끊임없는 노력으로,<br>미래를 만들어 나갑니다.</h2>
+                <p>아래 지원서를 통해 저에 대해 더 알아보실 수 있어요.</p>
+                <div class="application__cta-row">
+                    <a class="application__cta application__cta--fill" href="mailto:your.email@example.com">이메일 보내기</a>
+                    <a class="application__cta" href="https://github.com/yourid" target="_blank" rel="noopener">GitHub</a>
+                </div>
+            </div>
+
+            <div class="application__phone-wrap">
+                <div class="application__floor-glow" aria-hidden="true"></div>
+                <div class="application__phone" id="phoneFinal">
+                    <div class="application__screen">
+                        <div class="application__photo">강</div>
+                        <div class="application__label">지원서</div>
+                        <div class="application__name">강동균</div>
+                        <div class="application__role">DATA ENGINEER</div>
+
+                        <div class="application__block">
+                            <div class="application__block-t">지원 동기</div>
+                            <p>지원 동기 한두 문장이 작성할 공간!</p>
+                        </div>
+
+                        <div class="application__block">
+                            <div class="application__block-t">앞으로 하고 싶은 일</div>
+                            <p>앞으로 만들고 싶은 데이터 시스템과 성장 방향을 한두 문장으로 작성하는 곳</p>
+                        </div>
+
+                        <div class="application__block">
+                            <div class="application__block-t">Contact</div>
+                            <div class="application__links">
+                                <a href="tel:010-0000-0000"><span class="application__dot application__dot--yellow"></span>010-0000-0000</a>
+                                <a href="mailto:your.email@example.com"><span class="application__dot application__dot--orange"></span>your.email@example.com</a>
+                                <a href="https://github.com/yourid" target="_blank" rel="noopener"><span class="application__dot application__dot--green"></span>github.com/yourid</a>
+                                <a href="#hero"><span class="application__dot application__dot--blue"></span>portfolio link</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 외부코드  -->
+    <div class="sparkle-fx" id="sparkleFx"></div>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var season = ["봄","여름","가을","겨울"];
+    document.write(season[0]);
+    for(i=0;i<season.length;i++){
+        document.write(season[i] + "&nbsp;&nbsp;");
+    }
+
+    var nums = [1,2,3];
+    var chars = ["a","b","c","d"];
+    var numChar = nums.concat(chars);
+    document.write(numChars + "<br>");
+
+    nums.push(4,5,6,7);
+    document.write(numChars + "<br>");
+
+    document.write(chars.pop() + " : " + chars.shift());
+</script>
+</body>
+</html>

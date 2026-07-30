@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script type="text/javascript">
+    function chk(){
+      f = document.frm;
+      if(f.id.value==""){
+        alert("아이디를 입력하세요.");
+        f.id.focus();
+        return;
+      }
+      if(f.pwd.value==""){
+        alert("비번를 입력하세요.");
+        f.pwd.focus();
+        return;
+      }
+      f.action = "obj4.jsp";
+      f.submit();
+    }
+  </script>
+</head>
+<body>
+//form name이 없으면 forms[0],forms[1]
+<form name="frm" method="get">
+  ID : <input name="id"><br>
+  PWD : <input name="pwd" type="password"><br>
+  <input type="button" value="로그인" onclick="chk()">
+</form>
+</body>
+</html>

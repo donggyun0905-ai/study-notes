@@ -1,0 +1,33 @@
+<!-- scr4.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scr4</title>
+</head>
+<body>
+<script type="text/javascript">
+    let one = prompt("50미만의 숫자를 입력하세요");
+    let two = prompt("50미만의 숫자를 입력하세요");
+    //if는 선택문이고 괄호 안에는 반드시 true나 false값이 들어와야함
+    //괄호 안에 값이 true이면 if절({} 뜻함)이 실행되고 false이면 실행이 안됨
+    // ||(or)는 앞의 조건과 뒤의 조건 중 하나라도 만족하면 true를 return함
+    if(one < 10 || two < 10){ // one이 10보다 작거나 two가 10보다 작다면
+        alert("숫자 2개 중 하나는 최소한 10 미만입니다."); // 실행
+    }
+    else{ // 아닌 경우
+        alert("숫자 2개 중에 10 미만인 숫자는 없습니다."); // 실행
+    }
+    
+    one = prompt("50미만의 숫자를 입력하세요");
+    two = prompt("50미만의 숫자를 입력하세요");
+    if( one < 50 && two < 50){
+        alert("숫자 2개 모두 50 미만이군요"); // 실행
+    }
+    else{
+        alert("조건에 맞지 않는 숫자가 있습니다.");
+    }
+</script>
+
+</body>
+</html>
