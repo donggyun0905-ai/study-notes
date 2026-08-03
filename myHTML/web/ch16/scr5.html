@@ -1,0 +1,87 @@
+<!-- scr5.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scr5</title>
+</head>
+<body>
+<script type="text/javascript">
+    //1에서 5까지의 합을 출력하시오.
+    sum = 0;
+    //for 반복문: 변수의 초기값, 반복의 조건, 
+    //변수선언- var(일반적으로 생략): {}단위의 영역을 구분하지 않는 스코프(범위) , let: 
+    for(i = 1; i < 6; i++){
+        sum+= i;
+    }
+    document.write("1에서 5까지 합: " + sum + "<br>");
+    document.write(`1에서 5까지 합:  + ${sum}`  + "<br>");
+    document.write(13/10 + "<br>");
+    document.write("parseInt: " + parseInt(13/10) + "<br>");
+    document.write(sum + " : " + i + "<br>");
+
+    /*
+    for(;;){
+        document.write("무한반복");
+    }
+    */
+
+    // 문제1. 1에서 40가지 짝수의 합을 구하시오.
+
+    sum = 0; //초기화
+    for(i = 1; i<41; i++){
+        if(i%2==0){
+            //document.write(i + " ");
+            sum+= i;
+        }
+    }
+    document.write("문제2 정답: " + sum + "<br>");
+    
+    // 문제2. 1에서 20사이의 3,6,9게임 규칙에 해당하는 값의 합을 구하시오.
+    sum = 0;
+    for(i = 1; i<21; i++){
+        a = i % 10;
+        if(a == 3 || a == 6 || a == 9){
+            sum += i;
+        }
+    }
+    document.write("문제2 정답: " + sum + "<br>");
+    // 문제3. 1에서 40사이의 3,6,9게임 규칙에 해당하는 값의 합을 구하시오. 정답: 489
+    sum = 0;
+    for(i = 1; i < 41; i++){
+        let str = i.toString(); 
+        if(str.includes('3') || str.includes('6') || str.includes('9')){
+            sum += i;
+        }
+    }
+    document.write("문제3 정답: " + sum + "<br>");
+
+    sum = 0;
+    for(i = 1; i < 41; i++){
+        a = parseInt(i / 10);   // 10의자리 3의 배수인지 확인
+        b = i % 10;             // 1의자리 3의 배수인지 확인
+        if( a == 3 || a == 6 || a == 9 || b == 3 || b == 6 || b == 9){
+            sum += i;
+        }
+    }
+    document.write("문제3 정답: " + sum + "<br>");
+
+    a= "123456";
+    document.write(a.indexOf('3') + "<br>");
+    b="abcdef";
+    document.write(b.charAt(2)+"<br>");
+
+    sum = 0;
+    for(i=1;i<101;i++){
+        s = i.toString();
+        if(s.includes("3")||s.includes("6")||s.includes("9")){
+            document.write(i+" ");
+            sum+=i;
+        }
+    }
+    document.write("문제4 정답 : "+ sum + "<br>");
+
+</script>
+
+</body>
+</html>

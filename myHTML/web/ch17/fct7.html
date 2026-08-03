@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>제목입력</title>
+<link rel="stylesheet" href="css/event.css">
+</head>
+<body>
+<div id="item">
+	<img alt="" src="images/star.jpg">
+	<button id="open" class="over" onclick="showDetail()">프로필 설명 보기</button>
+	<div id="desc" class="detail">
+		<h4>정수아 국어 선생님</h4>
+		<p>이름 : 정수아
+				  학력 : 연세대학교 교육대학원 (국어교육 / 석사)
+		          약력 : 前 EBS수능국어 연계교재 인터넷감수, 前 메가스터디 수능국어 교재 집필
+		          개요 : 국어 강사이자 유튜버
+		          여담 
+		           - 본인이 극E형이라고 할 정도로 텐션이 좋다.
+		           - 철학 강의가 아닌가 할 정도로 깊이가 있슴.
+		</p>
+		<button id="close" onclick="hideDetail()">프로필 설명 닫기</button>
+	</div>
+</div>
+<script type="text/javascript">
+	function showDetail(){
+		document.querySelector("#desc").style.display = "block";
+		document.querySelector("#open").style.display = "none";
+	}
+	function hideDetail(){
+		document.querySelector("#desc").style.display = "none";
+		document.querySelector("#open").style.display = "block";
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+

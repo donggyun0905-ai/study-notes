@@ -1,0 +1,22 @@
+<!-- scr1.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+    body {text-align: center;}
+    h1 {color: blue;}
+</style>
+<title>scr1</title>
+</head>
+<body>
+    <h1 id="heading">자바스크립트</h1>
+    <p>위 텍스트를 클릭해 보세요</p>
+    <script type="text/javascript">
+        let heading = document.querySelector("#heading");
+        heading.onclick = function() {
+            heading.style.color = "red";
+        }
+    </script>
+</body>
+</html>

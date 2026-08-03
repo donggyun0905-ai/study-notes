@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    /*function greeting(){
+        var userName = prompt("이름을 입력하세요");
+        document.write("안녕하세요. <span class='accent'>");
+        document.write(userName + "</span>님!");
+    }
+    greeting();*/
+    //즉시 함수 실행 : jquery
+
+    (function(){
+        var userName = prompt("성명을 입력하세요");
+        document.write("안녕하세요. <span class='accent'>");
+        document.write(userName + "</span>님!");
+    }());
+    document.write("<br>");
+    (function (a,b){
+        sum = a+b;
+    }/*함수선언*/(100,200)/*함수호출*/);
+    document.write(sum);
+</script>
+</body>
+</html>
