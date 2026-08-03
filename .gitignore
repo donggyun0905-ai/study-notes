@@ -7,6 +7,9 @@ out/
 !**/src/test/**/out/
 .kotlin
 
+### Eclipse workspace metadata ###
+.metadata/
+
 ### Eclipse ###
 .apt_generated
 .classpath
