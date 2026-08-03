@@ -37,7 +37,8 @@ public class PalindromeEx1A_3 {
 		    n5 = n4 / 10;
 
 		    f  = n5 % 10;
-		
+		}
+
 		// 문제2.2진수의 대칭수인 100,000 이하 숫자의 합은 얼마입니까? (21,865,050)
 		System.out.print("2번 : ");
 

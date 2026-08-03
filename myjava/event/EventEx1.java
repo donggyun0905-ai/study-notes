@@ -17,7 +17,7 @@ public class EventEx1 extends MFrame implements ActionListener {
         //1. 이벤트 생성
         add(btn = new Button("버튼"),BorderLayout.SOUTH);
         //4. 이벤트 소스랑 이벤트 핸들러 연결(addXxxLinstener)
-        btn.addActionListener(null);
+        btn.addActionListener(this);
     }
 
     //3. 이벤트 리서너의 메소드(이벤트 핸들러) 를 구현

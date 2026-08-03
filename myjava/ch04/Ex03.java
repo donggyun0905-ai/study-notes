@@ -1,6 +1,6 @@
 package ch04;
 
-class A3 {
+class A3_03 {
 
 }
 
@@ -12,8 +12,8 @@ public class Ex03 {
 		int j = i;// call by value
 		i = 11;
 
-		A3 a = new A3();
-		A3 b = new A3();
+		A3_03 a = new A3_03();
+		A3_03 b = new A3_03();
 		System.out.println(a);
 		System.out.println(b);
 		a = b;//call by reference

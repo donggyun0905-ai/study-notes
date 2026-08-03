@@ -23,10 +23,9 @@ public class SynchronizedEx1  implements Runnable{
 		}catch(Exception e) {}
 	}
 	
-@Override{
-	pubilc void run() {
+	@Override
+	public void run() {
 		b(Thread.currentThread().getName());
-	}
 	}
 	
 	public static void main(String[] args) {
