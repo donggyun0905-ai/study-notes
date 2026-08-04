@@ -1,13 +1,12 @@
 package graphics;
 
-import javax.management.MBeanAttributeInfo;
 import java.awt.*;
 
-public class ImageViewEx extends MFrame {
+public class ImageViewEx1 extends MFrame {
 
     Image img;
 
-    public ImageViewEx() {
+    public ImageViewEx1() {
         super(500,300);
         img = Toolkit.getDefaultToolkit().getImage("graphics/winter.jpg");
 
@@ -25,6 +24,6 @@ public class ImageViewEx extends MFrame {
     }
 
     public static void main(String[] args) {
-        new ImageViewEx();
+        new ImageViewEx1();
     }
 }
