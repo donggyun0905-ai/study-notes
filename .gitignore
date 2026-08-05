@@ -43,3 +43,9 @@ $RECYCLE.BIN/
 
 ### Backup archives ###
 *.zip
+
+### Course project extras (not part of myJava, contains other teams' materials) ###
+/Poject01/
+
+### Library jars ###
+*.jar

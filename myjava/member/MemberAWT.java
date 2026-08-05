@@ -24,6 +24,7 @@ public class MemberAWT extends MFrame implements ActionListener {
 	Vector<MemberBean> vlist;
 	MemberMgr mgr;
 	int num;
+	ZipcodeFrame zf;
 	
 
 	public MemberAWT() {
@@ -113,11 +114,11 @@ public class MemberAWT extends MFrame implements ActionListener {
 				}
 			}
 		});
-		//Vector<String> vlist = mgr.getTeamList();
+		Vector<String> vlist = mgr.getTeamList();
 		ch.add("팀을 선택하세요");
-		//for (int i = 0; i < vlist.size(); i++) {
-			//ch.add(vlist.get(i));
-		//}
+		for (int i = 0; i < vlist.size(); i++) {
+			ch.add(vlist.get(i));
+		}
 		p10.add(ch);
 		p3.add(p10);
 		//////////////////////////////
@@ -179,11 +180,11 @@ public class MemberAWT extends MFrame implements ActionListener {
 				}
 			}
 		});
-		//Vector<String> vlist = mgr.getTeamList();
+		Vector<String> vlist = mgr.getTeamList();
 		ch.add("팀을 선택하세요");
-		//for (int i = 0; i < vlist.size(); i++) {
-			//ch.add(vlist.get(i));
-		//}
+		for (int i = 0; i < vlist.size(); i++) {
+			ch.add(vlist.get(i));
+		}
 		p10.add(ch);
 		p3.add(p10);
 		//////////////////////////////
@@ -248,6 +249,15 @@ public class MemberAWT extends MFrame implements ActionListener {
 			vlist.removeAllElements();
 			viewList();
 		}else if(obj==zipBtn/*우편번호 검색창*/) {
+			//처음 실행할 때 객체를 생성하지만 두번째는 재사용
+			if(zf==null){
+				zf = new ZipcodeFrame(this);
+				zf.setLocation(getX()+getWidth(),getY());
+				zf.setVisible(true);
+			}else{
+				zf.setLocation(getX()+getWidth(),getY());
+				zf.setVisible(true);
+			}
 			
 		}else if(obj==insBtn/*입력저장버튼*/) {
 			MemberBean bean = new MemberBean();
@@ -282,7 +292,17 @@ public class MemberAWT extends MFrame implements ActionListener {
 			}
 			
 		}else if(obj==dupBtn/*중복버튼*/) {
-			
+			String phone = tf2.getText().trim();
+			if(phone.isEmpty()){
+				new DialogBox(this,"전화번호를 입력하세요","알림");
+				tf2.requestFocus();
+			}else{
+				boolean result = mgr.isDuplicatePhone(phone);
+				if(result)
+					new DialogBox(this,"중복된 전화번호입니다","중복");
+				else
+					new DialogBox(this,"사용 가능한 전화번호입니다","중복");
+			}
 		}
 		validate();
 	}//--actionPerformed

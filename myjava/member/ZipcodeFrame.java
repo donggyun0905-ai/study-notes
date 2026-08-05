@@ -24,9 +24,9 @@ implements ActionListener{
 	DialogBox err;
 	MemberAWT awt;
 	
-	public ZipcodeFrame(/* MemberAWT awt */) {
+	public ZipcodeFrame(MemberAWT awt) {
 		super(300, 500);
-		//this.awt = awt;
+		this.awt = awt;
 		setTitle("ZipcodeFrame");
 		mgr = new ZipcodeMgr();
 		p1=new JPanel();
@@ -78,12 +78,21 @@ implements ActionListener{
 				}
 			}
 		}else if(obj==list||obj==selectBtn) {
+			String add = list.getSelectedItem().trim() + "   ";
+			//new DialogBox(this,add,"주소");
+			/*선택한 주소를 더블클릭 또는 '선택' 버튼을 클릭하면
+			* 자신의 창은 사라지고 MemberAWT창에 있는 주소값을 전달
+			* 검색된 주소 리스트는 모두 제거
+			* */
+			awt.tf4.setText(add);
+			list.removeAll();
+			dispose();
 
 		}
 	}
 	
 	public static void main(String[] args) {
-		new ZipcodeFrame();
+		//new ZipcodeFrame(null);
 	}
 }
 

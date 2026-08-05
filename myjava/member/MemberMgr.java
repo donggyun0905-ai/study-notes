@@ -176,6 +176,51 @@ public class MemberMgr {
         return flag;
     }
 
+    //phone 번호 중복 체크 : 중복이면 true 리턴
+    public boolean isDuplicatePhone(String phone){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        boolean check = false;
+
+        try {
+            con = pool.getConnection();
+            sql = "SELECT phone FROM tblmember where phone = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,phone);
+            rs = pstmt.executeQuery();
+            if(rs.next()) check = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            pool.freeConnection(con,pstmt,rs);
+        }
+        return check;
+    }
+
+    //팀 이름 리스트(중복 제거)
+    public Vector<String> getTeamList(){
+        Connection con = null;
+        PreparedStatement pstmt = null;
+        String sql = null;
+        ResultSet rs = null;
+        Vector<String> vlist = new Vector<String>();
+
+        try {
+            con = pool.getConnection();
+            sql = "SELECT distinct team FROM tblmember";
+            pstmt = con.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while(rs.next()) vlist.add(rs.getString(1));
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            pool.freeConnection(con,pstmt,rs);
+        }
+        return vlist;
+    }
+
     public static void main(String[] args) {
         MemberMgr mgr = new MemberMgr();
         System.out.println(mgr.selectCnt());
