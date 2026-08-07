@@ -62,7 +62,7 @@ public class ChatClient1 extends JFrame implements ActionListener, Runnable{
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		if(obj==tf1||obj==btn1) {
-			connect(tf1.getText().trim());
+			connect(tf1.getText());
 			tf1.setEnabled(false);
 			btn1.setEnabled(false);
 			tf2.requestFocus();
@@ -70,16 +70,17 @@ public class ChatClient1 extends JFrame implements ActionListener, Runnable{
 			String str = tf2.getText().trim();
 			if(str.isEmpty()) return;
 			//필터링
-			if(filterMgr(str)) {//금지어가 있다면
-				new DialogBox(this, "금지어입니다", "욕설");
+			/*if(filterMgr(str)){ //금지어가 있다면
+				new DialogBox(this,"금지어입니다.","경고");
 				tf2.setText("");
 				tf2.requestFocus();
-				return;//서버로 보내지 않고 메소드 빠져 나옴
-			}
-			if(id==null) {//id값 보낼때 (한번만 실행)
-				id = str;
-				setTitle(getTitle() + " -  " + "[" + id + "]");
-				ta.setText("Chat Start...\n");
+				return; //서버로 보내지 않고 메소드 빠져나옴
+			}*/
+			str = makeSwearWords(str);
+			if(id == null){ //id값을 서버로 보냄(한번만)
+				id= str;
+				setTitle(getTitle() + "-" + "[" + id + "]");
+				ta.setText("Chat Start.......\n");
 			}
 			out.println(str);//서버로 전송
 			tf2.setText("");
@@ -88,46 +89,59 @@ public class ChatClient1 extends JFrame implements ActionListener, Runnable{
 	}//--actionPerformed
 	
 	//msg : 문장 ex) 야! 미친놈 집에서 궁상 떨지마~
+	//msg : 너 진짜 개 새끼구나~ (o) - 공백/기호 제거 후 비교하므로 필터링 됨
 	public boolean filterMgr(String msg) {
-		for (String str : swear) {
-			if(msg.contains(str)) {
-				return true;//욕설이 포함이 됨.
+		//한글, 영문, 숫자만 남기고 공백/콤마/특수문자 등은 모두 제거
+		String check = msg.replaceAll("[^가-힣a-zA-Z0-9]", "");
+		for (String str:swear) {
+			if(check.contains(str)){
+				return true;//욕설이 포함이 됨
 			}
 		}
 		return false;
 	}
+
+	public String makeSwearWords(String msg){
+		String result = msg;
+		for (String str : swear){
+			if(result.contains(str)){
+				//욕설 길이에 맞게 * 생성 (ex: 씨발 -> **)
+				String mask = "*".repeat(str.length());
+				result = result.replaceAll(str,mask);
+			}
+		}
+		return result;
+	}
 	
 	@Override //서버로 부터 메세지가 들어오면 반응하는 기능
 	public void run() {
-		try {
-			while(true) {
-				ta.append(in.readLine()+"\n");
+		try{
+		    while(true){
+				ta.append(in.readLine() + "\n");
 				tf2.requestFocus();
 			}
-		} catch (Exception e) {
-			System.err.println("Error in run");
-			System.exit(1);
+		} catch (Exception e){
+			System.out.println("Error in run");
+			System.out.println(1);
 		}
 	}//--run
 	
 	public void connect(String host){
-		try {
-			Socket sock = new Socket(host, PORT);
-			in = new BufferedReader(
-					new InputStreamReader(
-							sock.getInputStream()));
-			out = new PrintWriter(
-					sock.getOutputStream(), true);
-			ta.append(in.readLine()+"\n");
+		try{
+			Socket sock = new Socket(host,PORT);
+			in = new BufferedReader(new InputStreamReader(sock.getInputStream()));
+			out = new PrintWriter(sock.getOutputStream(),true);
+			//서버 : "반갑습니다. 사용할 아이디를 입력하세요"
+			ta.append(in.readLine() +"\n");
 			tf2.requestFocus();
-			//Server 접속 성공시 Thread 기능 start
+			//Server접속 성공시 Thread 기능 start
 			new Thread(this/*Runnable*/).start();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception e){
+		    e.printStackTrace();
 		}
 	}
 	
 	public static void main(String[] args) {
-		new ChatClient1();new ChatClient1();new ChatClient1();
+		new ChatClient1();
 	}
 }
