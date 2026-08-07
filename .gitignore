@@ -49,3 +49,6 @@ $RECYCLE.BIN/
 
 ### Library jars ###
 *.jar
+
+### Course PDFs (specs/handouts, not source) ###
+myJava/net/MyChat_v2.0_프로그램명세서.pdf
