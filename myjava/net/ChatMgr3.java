@@ -1,4 +1,4 @@
-package net;
+/*package net;
 
 import member.DBConnectionMgr;
 
@@ -21,7 +21,7 @@ import java.util.Vector;
  - public Vector<MessageBean> getMsgList(String id){} <- 쪽지리스트
 * */
 
-public class ChatMgr3 {
+/*public class ChatMgr3 {
 
     private DBConnectionMgr pool;
 
@@ -39,7 +39,7 @@ public class ChatMgr3 {
 
         try {
             con = pool.getConnection();
-            sql = "select * from tblRegister where id = ? and pw = ?";
+            sql = "select * from tblRegister where id = ? and pwd = ?";
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, id);
             pstmt.setString(2, pwd);
@@ -128,4 +128,4 @@ public class ChatMgr3 {
                     + " (" + m.getSendDate() + ")");
         }
     }
-}
+}*/
