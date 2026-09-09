@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ch04 — 함수(Function) 학습자료</title>
+<style>
+:root{
+  --navy-950:#0a1220; --navy-900:#0f1c30; --navy-800:#152742;
+  --navy-700:#1c3252; --navy-600:#284368;
+  --yellow:#ffc94d; --yellow-dim:#8a7132; --cyan:#3fd9d0;
+  --text-hi:#eef3fb; --text-mid:#b7c4da; --text-dim:#7c8ba6;
+  --code-bg:#0c1626; --danger:#ff8181; --ok:#7be0a8;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{background:var(--navy-950);color:var(--text-mid);
+  font-family:"Malgun Gothic","Pretendard","Apple SD Gothic Neo",sans-serif;
+  line-height:1.65;font-size:15.5px;}
+::selection{background:var(--yellow);color:var(--navy-950);}
+
+.wrap{display:flex;max-width:1320px;margin:0 auto;}
+nav.toc{position:sticky;top:0;height:100vh;width:230px;flex:0 0 230px;
+  padding:32px 18px 32px 28px;overflow-y:auto;border-right:1px solid var(--navy-700);}
+nav.toc .brand{font-size:13px;letter-spacing:.14em;color:var(--cyan);font-weight:700;margin-bottom:4px;}
+nav.toc .brand-sub{font-size:19px;color:var(--text-hi);font-weight:800;margin-bottom:24px;}
+nav.toc a{display:block;color:var(--text-dim);text-decoration:none;font-size:13px;
+  padding:6px 10px;border-radius:6px;margin-bottom:1px;transition:.15s;}
+nav.toc a:hover{color:var(--text-hi);background:var(--navy-800);}
+
+main{flex:1;min-width:0;padding:48px 56px 120px;}
+
+.hero{padding:34px 38px;border-radius:16px;
+  background:linear-gradient(135deg,var(--navy-800) 0%, var(--navy-900) 70%);
+  border:1px solid var(--navy-700);margin-bottom:40px;position:relative;overflow:hidden;}
+.hero::after{content:"04";position:absolute;right:0px;top:-40px;font-size:170px;font-weight:900;
+  color:var(--navy-700);opacity:.4;}
+.hero .eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--yellow);font-weight:700;
+  font-size:12.5px;letter-spacing:.12em;margin-bottom:12px;position:relative;}
+.hero .eyebrow::before{content:"●";font-size:8px;}
+.hero h1{color:var(--text-hi);font-size:30px;margin:0 0 8px;font-weight:800;position:relative;}
+.hero p{margin:0;color:var(--text-mid);font-size:14.5px;max-width:640px;position:relative;}
+
+section{margin-bottom:44px;scroll-margin-top:20px;}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.sec-num{font-size:12.5px;font-weight:800;color:var(--navy-950);background:var(--yellow);
+  padding:2px 9px;border-radius:6px;flex:0 0 auto;}
+h2{color:var(--text-hi);font-size:19px;margin:0;font-weight:800;}
+h4{color:var(--text-hi);font-size:14px;margin:14px 0 6px;font-weight:700;}
+p{color:var(--text-mid);margin:0 0 10px;}
+
+.topic{background:var(--navy-900);border:1px solid var(--navy-700);border-radius:12px;
+  padding:20px 24px;margin-bottom:14px;}
+.topic-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.topic-title .tag{font-size:11px;font-weight:700;color:var(--navy-950);background:var(--cyan);
+  padding:2px 8px;border-radius:5px;}
+.topic-title h3{color:var(--text-hi);font-size:16px;margin:0;font-weight:700;}
+.topic .concept{color:var(--text-mid);font-size:14px;margin-bottom:10px;}
+
+.syntax{background:var(--navy-800);border:1px dashed var(--navy-600);border-radius:8px;
+  padding:10px 14px;font-family:"D2Coding","Consolas",monospace;font-size:13px;color:var(--yellow);
+  margin-bottom:10px;}
+
+pre{background:var(--code-bg);border:1px solid var(--navy-700);border-radius:10px;
+  padding:14px 16px;overflow-x:auto;font-size:13px;line-height:1.55;margin:8px 0 10px;}
+code{font-family:"D2Coding","Consolas","Courier New",monospace;color:#d7e2f2;}
+.kw{color:#7fb3ff;} .str{color:#ffd479;} .cm{color:#5f7290;font-style:italic;}
+.fn{color:#c9a4ff;} .num{color:#8fe7d6;}
+p code, li code, td code{background:var(--navy-800);padding:1px 6px;border-radius:5px;font-size:.9em;color:var(--yellow);}
+
+.note{border-left:3px solid var(--cyan);background:var(--navy-950);padding:10px 14px;
+  border-radius:0 8px 8px 0;font-size:13.5px;margin-top:8px;}
+.note b{color:var(--cyan);}
+.warn{border-left-color:var(--danger);}
+.warn b{color:var(--danger);}
+.tip{border-left-color:var(--ok);}
+.tip b{color:var(--ok);}
+
+table{width:100%;border-collapse:collapse;margin:10px 0 6px;font-size:13px;}
+th{text-align:left;background:var(--navy-800);color:var(--text-hi);padding:8px 10px;
+  border-bottom:2px solid var(--navy-600);font-weight:700;}
+td{padding:8px 10px;border-bottom:1px solid var(--navy-800);color:var(--text-mid);}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:900px){.grid2{grid-template-columns:1fr;} nav.toc{display:none;} main{padding:28px 20px 100px;}}
+
+footer{text-align:center;color:var(--text-dim);font-size:12.5px;padding:36px 0 10px;
+  border-top:1px solid var(--navy-800);margin-top:16px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav class="toc">
+    <div class="brand">CH04 학습자료</div>
+    <div class="brand-sub">함수(Function)</div>
+    <a href="#c1">1. 단일행 함수 · DUAL</a>
+    <a href="#c2">2. 형변환(자동/수동)</a>
+    <a href="#c3">3. NULL 처리(NVL)</a>
+    <a href="#c4">4. DECODE / CASE</a>
+    <a href="#c5">5. ROWNUM / 윈도우함수</a>
+    <a href="#c6">6. 그룹함수 · GROUP BY</a>
+    <a href="#c7">7. HAVING</a>
+  </nav>
+  <main>
+    <div class="hero">
+      <div class="eyebrow">모두의 SQL · CHAPTER 04</div>
+      <h1>함수 — 단일행 함수 vs 그룹 함수</h1>
+      <p><code>ch04.sql</code> 코드를 실행 순서대로 분석한 학습자료입니다. HR 스키마(EMPLOYEES) 기준입니다.</p>
+    </div>
+
+    <section id="c1">
+      <div class="sec-head"><span class="sec-num">01</span><h2>단일행 함수 · DUAL 테이블</h2></div>
+      <div class="topic">
+        <p class="concept"><code>DUAL</code>은 오라클이 제공하는 1행짜리 가상 테이블로, 테이블 없이 함수/상수 계산 결과만 확인할 때 FROM절에 형식상 붙입니다.</p>
+<pre><code><span class="kw">SELECT</span> sysdate <span class="kw">FROM</span> dual;</code></pre>
+        <div class="note"><b>단일행 함수란</b> — 입력 행 하나당 결과도 하나(1:1)인 함수입니다. <code>SYSDATE</code>, <code>TO_CHAR</code>, <code>NVL</code> 등이 해당하며, 다음의 그룹함수(N:1)와 대비됩니다.</div>
+      </div>
+    </section>
+
+    <section id="c2">
+      <div class="sec-head"><span class="sec-num">02</span><h2>형변환 — 자동(암시적) vs 수동(명시적)</h2></div>
+      <div class="topic">
+<pre><code><span class="cm">-- 자동 타입변환: 문자 '2'가 숫자로 암시적 변환됨</span>
+<span class="kw">SELECT</span> 1 + <span class="str">'2'</span> <span class="kw">FROM</span> dual; <span class="cm">-- 결과: 3</span>
+
+<span class="cm">-- 수동 타입변환: TO_CHAR로 날짜 서식 지정</span>
+<span class="kw">SELECT</span>
+    to_char(sysdate, <span class="str">'YY'</span>),
+    to_char(sysdate, <span class="str">'YYYY'</span>),
+    to_char(sysdate, <span class="str">'MM'</span>),
+    to_char(sysdate, <span class="str">'HH:MI:SS PM'</span>)
+<span class="kw">FROM</span> dual;
+
+<span class="kw">SELECT</span> TO_NUMBER(<span class="str">'123'</span>) + TO_NUMBER(<span class="str">'123'</span>) <span class="kw">FROM</span> dual; <span class="cm">-- 결과: 246</span></code></pre>
+        <div class="note warn"><b>실무 주의</b> — 암시적 형변환은 편리하지만 예상치 못한 결과나 인덱스 미사용(성능저하)의 원인이 됩니다. 조건절에서는 <code>TO_CHAR</code>/<code>TO_NUMBER</code>/<code>TO_DATE</code>로 명시적 변환을 권장합니다.</div>
+      </div>
+    </section>
+
+    <section id="c3">
+      <div class="sec-head"><span class="sec-num">03</span><h2>NULL 처리 — NVL</h2></div>
+      <div class="topic">
+        <p class="concept"><code>NVL(컬럼, 대체값)</code>은 컬럼 값이 NULL일 때만 지정한 대체값으로 바꿔줍니다. NULL이 포함된 연산·집계는 예기치 않게 NULL이 되거나 누락되므로 방어적으로 사용합니다.</p>
+<pre><code><span class="cm">-- commission_pct가 NULL이면 1(=100%)로 대체 후 곱셈 → NULL 때문에 계산이 날아가는 것 방지</span>
+<span class="kw">SELECT</span> salary * nvl(commission_pct, 1)
+<span class="kw">FROM</span> employees
+<span class="kw">ORDER BY</span> commission_pct;
+
+<span class="cm">-- COUNT(컬럼)은 NULL을 세지 않는다 → NVL로 NULL을 값으로 바꿔야 전체 카운트 가능</span>
+<span class="kw">SELECT</span> COUNT(nvl(commission_pct, 1))
+<span class="kw">FROM</span> employees;</code></pre>
+        <div class="note"><b>핵심</b> — <code>COUNT(*)</code>는 행 개수 전체를 세지만, <code>COUNT(컬럼명)</code>은 그 컬럼이 NULL이 아닌 행만 셉니다. commission_pct가 NULL인 직원은 원래 COUNT(commission_pct)에서 빠지는데, NVL로 감싸면 전체가 다 카운트됩니다.</div>
+      </div>
+    </section>
+
+    <section id="c4">
+      <div class="sec-head"><span class="sec-num">04</span><h2>DECODE vs CASE WHEN — 조건 논리</h2></div>
+      <div class="topic">
+        <div class="grid2">
+          <div>
+            <p class="concept"><b style="color:var(--text-hi)">DECODE</b> — Oracle 전용 함수. IF-ELSE와 유사하지만 "같음(=)" 비교만 가능.</p>
+            <div class="syntax">DECODE(컬럼, 비교값, 결과값, 기본값)</div>
+<pre><code><span class="cm">-- department_id=60인 직원만 급여 10% 인상</span>
+<span class="kw">SELECT</span> first_name, last_name, department_id,
+       salary 원래급여,
+       decode(department_id, 60, salary*<span class="num">1.1</span>, salary),
+       decode(department_id, 60, <span class="str">'10% 인상'</span>, <span class="str">'동결'</span>)
+<span class="kw">FROM</span> employees
+<span class="kw">ORDER BY</span> department_id;</code></pre>
+          </div>
+          <div>
+            <p class="concept"><b style="color:var(--text-hi)">CASE WHEN</b> — ANSI 표준. 범위·부등호 등 복잡한 다중 조건에 사용.</p>
+            <div class="syntax">CASE WHEN 조건1 THEN 값1<br>&nbsp;&nbsp;WHEN 조건2 THEN 값2 ELSE 값3 END</div>
+<pre><code><span class="cm">-- 9000이상 상위 / 6000이상 중위 / 나머지 하위</span>
+<span class="kw">SELECT</span> first_name, last_name,
+    <span class="kw">CASE</span>
+        <span class="kw">WHEN</span> salary &gt;= <span class="num">9000</span> <span class="kw">THEN</span> <span class="str">'상위급여'</span>
+        <span class="kw">WHEN</span> salary &gt;= <span class="num">6000</span> <span class="kw">THEN</span> <span class="str">'중위급여'</span>
+        <span class="kw">ELSE</span> <span class="str">'하위급여'</span>
+    <span class="kw">END AS</span> 급여등급
+<span class="kw">FROM</span> employees
+<span class="kw">WHERE</span> job_id = <span class="str">'IT_PROG'</span>;</code></pre>
+          </div>
+        </div>
+        <div class="note tip"><b>선택 기준</b> — 단순 "같음" 매칭이면 DECODE가 짧고, <code>&gt;=</code> 같은 범위/부등호 조건이 필요하면 반드시 CASE WHEN을 씁니다. DECODE는 조건식(&gt;, &lt;, BETWEEN 등)을 표현할 수 없습니다.</div>
+      </div>
+    </section>
+
+    <section id="c5">
+      <div class="sec-head"><span class="sec-num">05</span><h2>ROWNUM vs 윈도우 함수 (RANK / DENSE_RANK / ROW_NUMBER)</h2></div>
+      <div class="topic">
+<pre><code><span class="cm">-- ROWNUM: 정렬과 무관하게 "조회된 순서"대로 매겨지는 가상번호 (정렬 후 번호가 아님에 주의)</span>
+<span class="kw">SELECT</span> ROWNUM <span class="kw">AS</span> 가상번호, employee_id, salary, first_name
+<span class="kw">FROM</span> employees
+<span class="kw">ORDER BY</span> 3 <span class="kw">DESC</span>;
+
+<span class="cm">-- 윈도우 함수: 정렬 기준에 따른 "진짜 순위"를 매김</span>
+<span class="kw">SELECT</span> employee_id, salary,
+    RANK()       OVER(<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) rank_급여,
+    DENSE_RANK() OVER(<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) dense_rank_급여,
+    ROW_NUMBER() OVER(<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) row_number_급여
+<span class="kw">FROM</span> employees;</code></pre>
+        <table>
+          <tr><th>함수</th><th>동점 처리</th><th>다음 순위</th></tr>
+          <tr><td><code>RANK()</code></td><td>동점에 같은 순위</td><td>동점 개수만큼 <b>건너뜀</b> (1,1,3)</td></tr>
+          <tr><td><code>DENSE_RANK()</code></td><td>동점에 같은 순위</td><td><b>건너뛰지 않음</b> (1,1,2)</td></tr>
+          <tr><td><code>ROW_NUMBER()</code></td><td>무조건 순차 번호</td><td>동점이어도 1,2,3</td></tr>
+        </table>
+        <div class="note warn"><b>ROWNUM 함정</b> — <code>ORDER BY</code>는 결과를 정렬해서 "보여줄 뿐", ROWNUM은 <b>정렬 이전</b> 원본 조회 순서 기준으로 이미 부여되어 있을 수 있습니다. "정렬된 순번"이 필요하면 ROWNUM이 아니라 ROW_NUMBER() OVER(ORDER BY ...)를 써야 합니다.</div>
+      </div>
+    </section>
+
+    <section id="c6">
+      <div class="sec-head"><span class="sec-num">06</span><h2>그룹 함수 · GROUP BY</h2></div>
+      <div class="topic">
+        <p class="concept">그룹함수(집계함수)는 여러 행(N) → 하나의 결과(1)로 압축합니다. <code>GROUP BY</code>는 특정 컬럼 값별로 그룹을 나눈 뒤 그 안에서 집계합니다.</p>
+<pre><code><span class="kw">SELECT</span> COUNT(salary) 행수 <span class="kw">FROM</span> employees;
+
+<span class="kw">SELECT</span> to_char(SUM(salary),<span class="str">'999,999,999.99'</span>) 합계,
+       to_char(AVG(salary),<span class="str">'999,999,999.99'</span>) 평균,
+       to_char(SUM(salary)/COUNT(salary),<span class="str">'999,999,999.99'</span>) 계산된평균
+<span class="kw">FROM</span> employees;
+
+<span class="kw">SELECT</span> MAX(salary) 최대값, MIN(salary) 최소값, MAX(first_name), MIN(first_name)
+<span class="kw">FROM</span> employees;</code></pre>
+        <div class="note"><b>문자열 MAX/MIN</b> — 숫자뿐 아니라 문자열에도 사용 가능하며, 이 경우 사전순(알파벳순) 최대/최소를 반환합니다.</div>
+
+        <h4>최고/최저 급여자의 이름 찾기 — 2가지 접근</h4>
+<pre><code><span class="cm">-- 방법1: 서브쿼리로 최대/최소값을 구해 WHERE에 재사용</span>
+<span class="kw">select</span> first_name, salary
+<span class="kw">from</span> employees
+<span class="kw">where</span> salary = (<span class="kw">select</span> max(salary) <span class="kw">from</span> employees)
+   <span class="kw">or</span> salary = (<span class="kw">select</span> min(salary) <span class="kw">from</span> employees);
+
+<span class="cm">-- 방법2: 윈도우 함수 RANK로 최고/최저 순위(=1)인 행만 필터 (인라인뷰 활용)</span>
+<span class="kw">SELECT</span> 성명, salary
+<span class="kw">FROM</span> (
+    <span class="kw">SELECT</span> first_name||<span class="str">' '</span>||last_name <span class="kw">AS</span> 성명, salary,
+           RANK() OVER (<span class="kw">ORDER BY</span> salary <span class="kw">ASC</span>)  <span class="kw">AS</span> 최저순위,
+           RANK() OVER (<span class="kw">ORDER BY</span> salary <span class="kw">DESC</span>) <span class="kw">AS</span> 최고순위
+    <span class="kw">FROM</span> employees
+)
+<span class="kw">WHERE</span> 최고순위 = 1 <span class="kw">OR</span> 최저순위 = 1;</code></pre>
+
+        <h4>GROUP BY — 단일 / 다중 그룹</h4>
+<pre><code><span class="cm">-- job_id별 총급여·평균급여·인원수 (총급여 내림차순)</span>
+<span class="kw">select</span> job_id, sum(salary) 직급별_총급여, avg(salary) 직급별_평균, count(job_id) 인원
+<span class="kw">from</span> employees
+<span class="kw">group by</span> job_id
+<span class="kw">order by</span> 2 <span class="kw">desc</span>;
+
+<span class="cm">-- 다중 컬럼 그룹화: job_id + manager_id 조합별로 집계</span>
+<span class="kw">select</span> job_id, manager_id, sum(salary), avg(salary)
+<span class="kw">from</span> employees
+<span class="kw">group by</span> job_id, manager_id
+<span class="kw">order by</span> job_id, manager_id;</code></pre>
+        <div class="note warn"><b>GROUP BY 규칙</b> — SELECT절에 집계함수가 아닌 일반 컬럼이 있다면, 그 컬럼은 반드시 GROUP BY에도 포함되어야 합니다(그렇지 않으면 오류).</div>
+      </div>
+    </section>
+
+    <section id="c7">
+      <div class="sec-head"><span class="sec-num">07</span><h2>HAVING — GROUP BY 결과에 대한 조건절</h2></div>
+      <div class="topic">
+        <p class="concept"><code>WHERE</code>는 그룹화 이전 개별 행을 거르고, <code>HAVING</code>은 그룹화·집계 이후 결과를 거릅니다. 집계함수(SUM, AVG 등)에 조건을 걸려면 반드시 HAVING을 사용해야 합니다.</p>
+<pre><code><span class="cm">-- employee_id 10이상 대상(WHERE) → job_id별 평균급여 산출(GROUP BY)
+--   → 평균급여 10000이상만(HAVING) → job_id 정렬</span>
+<span class="kw">select</span> job_id, avg(salary)
+<span class="kw">from</span> employees
+<span class="kw">where</span> employee_id >= 10
+<span class="kw">group by</span> job_id
+<span class="kw">having</span> avg(salary) >= 10000
+<span class="kw">order by</span> 1;</code></pre>
+        <div class="note"><b>실행 순서</b> — <code>FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY</code> 순으로 처리됩니다. HAVING이 GROUP BY 다음이라는 점, WHERE에는 집계함수를 못 쓴다는 점이 시험/실무에서 자주 나오는 함정입니다.</div>
+      </div>
+    </section>
+
+    <footer>ch04.sql 학습자료 · 모두의 SQL 연계 · 개인 강의용</footer>
+  </main>
+</div>
+</body>
+</html>
