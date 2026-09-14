@@ -1,0 +1,11 @@
+<!-- guestbook/logout.jsp -->
+<%@page contentType="text/html;charset=UTF-8"%>
+<%
+    	session.invalidate();
+		//response.sendRedirect("login.jsp");
+%>
+<script>
+   alert('로그아웃 되었습니다.');
+   location.href="login.jsp"; 
+</script>
+   

@@ -1,0 +1,41 @@
+## IntelliJ 파일 템플릿: Servlet
+## Ctrl+Alt+S → Editor → File and Code Templates → Templates 탭 → + → 이름 Servlet, 확장자 java
+## 아래 '===' 아래 내용을 본문에 붙여넣기
+## 사용: java 소스 폴더에서 Alt+Insert → Servlet → 클래스명 입력
+## 만든 뒤 @WebServlet("/...") 경로를 원하는 매핑으로 수정 (예: /ch09/teamDelete)
+===
+#if (${PACKAGE_NAME} && ${PACKAGE_NAME} != "")package ${PACKAGE_NAME};
+
+#end
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+
+@WebServlet("/${NAME}")
+public class ${NAME} extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        process(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        process(request, response);
+    }
+
+    private void process(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
+        // TODO: 요청 처리 로직
+
+        response.sendRedirect(request.getContextPath() + "/");
+    }
+}

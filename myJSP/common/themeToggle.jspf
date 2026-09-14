@@ -1,0 +1,73 @@
+<%-- ===========================================================
+     themeToggle.jspf — 모든 페이지 공통 다크/라이트 테마 토글 버튼
+
+     사용법: 페이지의 </body> 바로 앞에 한 줄만 추가
+         <%@ include file="/common/themeToggle.jspf" %>
+
+     동작 원리:
+     - 기존 페이지들은 각자 다른 방식으로 색을 입힘(bgcolor, <font>, Tailwind 등)
+     - 페이지 하나하나를 다 고치는 대신, CSS filter: invert() 로
+       문서 전체의 색상을 반전시켜서 "다크 모드처럼 보이게" 만듦
+     - 이미지/영상만 다시 한 번 반전시켜서 원래 색 그대로 보이게 함
+     - 선택한 테마는 localStorage에 저장 → 다른 페이지로 이동해도 유지됨
+     =========================================================== --%>
+<style>
+    #__themeToggleBtn {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 2147483647;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        background: #2b2f36;
+        color: #fff;
+        font-size: 20px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0,0,0,.3);
+    }
+    #__themeToggleBtn:hover { background: #3c4250; }
+
+    /* 다크 모드: 문서 전체를 반전 → 밝은 배경이 어둡게 보임 */
+    html[data-theme="dark"] {
+        filter: invert(1) hue-rotate(180deg);
+        background: #fff;
+    }
+    /* 이미지/영상은 한 번 더 반전해서 원래 색으로 되돌림 */
+    html[data-theme="dark"] img,
+    html[data-theme="dark"] video,
+    html[data-theme="dark"] iframe {
+        filter: invert(1) hue-rotate(180deg);
+    }
+    /* 버튼 자체도 반전 당하므로, 한 번 더 반전시켜 색이 그대로 보이게 */
+    html[data-theme="dark"] #__themeToggleBtn {
+        filter: invert(1) hue-rotate(180deg);
+    }
+</style>
+
+<button id="__themeToggleBtn" onclick="__toggleTheme()" title="라이트/다크 테마 전환">🌙</button>
+
+<script>
+    (function () {
+        // 페이지 로드 시, 저장된 테마가 dark면 바로 적용
+        var saved = localStorage.getItem('site-theme');
+        if (saved === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    })();
+
+    function __toggleTheme() {
+        var html = document.documentElement;
+        var isDark = html.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('site-theme', 'light');
+        } else {
+            html.setAttribute('data-theme', 'dark');
+            localStorage.setItem('site-theme', 'dark');
+        }
+    }
+</script>
