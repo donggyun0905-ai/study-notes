@@ -1,0 +1,188 @@
+/* ch16 Poll Program — 공통 스타일 */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 40px 16px;
+	background: #f4f6fb;
+	color: #1f2430;
+	font-family: "Segoe UI", "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+	line-height: 1.6;
+}
+
+div[align="center"] {
+	max-width: 620px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+h2 {
+	margin: 0 0 4px;
+	font-size: 1.6em;
+	font-weight: 700;
+	color: #3730a3;
+	letter-spacing: -0.02em;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid #dfe3ee;
+	margin: 16px 0;
+}
+
+b {
+	display: inline-block;
+	margin: 4px 0 12px;
+	font-size: 0.95em;
+	color: #6b7280;
+	font-weight: 600;
+}
+
+/* 레이아웃용 바깥 테이블(border 없음)은 배경/테두리 없이 */
+table:not([border]) {
+	width: 100%;
+	border-collapse: collapse;
+}
+table:not([border]) > tbody > tr > td {
+	padding: 0;
+	border: none;
+}
+
+/* 카드처럼 보이는 실제 콘텐츠 테이블 */
+table[border] {
+	width: 100%;
+	max-width: 560px;
+	margin: 0 auto 16px;
+	border-collapse: collapse;
+	background: #ffffff;
+	border: 1px solid #e3e6f0 !important;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 2px 10px rgba(30, 41, 90, 0.06);
+	font-size: 0.94em;
+}
+
+table[border] th,
+table[border] td {
+	border: 1px solid #edf0f7 !important;
+	padding: 10px 12px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+table[border] th {
+	background: #eef0fd;
+	color: #3730a3;
+	font-weight: 700;
+	text-align: center;
+}
+
+/* 목록의 번호/날짜 칸처럼 가운데 정렬이 어울리는 곳 */
+table[border] td[align="center"] {
+	text-align: center;
+}
+
+a {
+	color: #4f46e5;
+	text-decoration: none;
+	font-weight: 600;
+}
+a:hover {
+	text-decoration: underline;
+}
+
+/* 입력 요소 공통 */
+input[type="text"],
+input:not([type]),
+input[type="password"],
+select,
+textarea {
+	padding: 6px 9px;
+	border: 1px solid #d7dbea;
+	border-radius: 7px;
+	background: #fff;
+	font-size: 0.95em;
+	font-family: inherit;
+	color: #1f2430;
+}
+input[type="text"]:focus,
+input:not([type]):focus,
+select:focus {
+	outline: none;
+	border-color: #6366f1;
+	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* 버튼류 */
+input[type="submit"],
+input[type="button"],
+input[type="reset"] {
+	cursor: pointer;
+	padding: 7px 16px;
+	margin: 2px;
+	border: none;
+	border-radius: 7px;
+	font-size: 0.92em;
+	font-weight: 600;
+	background: #eef0fd;
+	color: #3730a3;
+	transition: background 0.15s ease, transform 0.05s ease;
+}
+input[type="submit"]:hover,
+input[type="button"]:hover {
+	background: #e0e3fb;
+}
+input[type="submit"]:active,
+input[type="button"]:active {
+	transform: translateY(1px);
+}
+/* 강조 버튼: 투표/작성/등록처럼 "제출"에 해당하는 것 */
+input[value="투표"],
+input[value="작성하기"],
+input[value="설문작성하기"] {
+	background: #4f46e5;
+	color: #fff;
+}
+input[value="투표"]:hover,
+input[value="작성하기"]:hover,
+input[value="설문작성하기"]:hover {
+	background: #4338ca;
+}
+
+/* 라디오/체크박스는 텍스트와 살짝 간격 */
+input[type="radio"],
+input[type="checkbox"] {
+	margin-right: 4px;
+	accent-color: #4f46e5;
+}
+
+/* 투표 종료 안내 텍스트 */
+td:has(> input[value="투표"]) {
+	white-space: nowrap;
+}
+
+/* 결과 막대그래프 (pollView.jsp) */
+.bar-track {
+	width: 100%;
+	min-width: 100px;
+	height: 14px;
+	background: #eef0f6;
+	border-radius: 999px;
+	overflow: hidden;
+}
+.bar-fill {
+	height: 100%;
+	border-radius: 999px;
+	transition: width 0.4s ease;
+}
+
+.winner {
+	color: #e11d48;
+	font-weight: 700;
+}
+.winner::before {
+	content: "👑 ";
+}
