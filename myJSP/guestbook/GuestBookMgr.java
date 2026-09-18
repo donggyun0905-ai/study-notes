@@ -66,8 +66,7 @@ public class GuestBookMgr {
                         bean.setName(rs.getString(3));
                         bean.setEmail(rs.getString(4));
                         bean.setHp(rs.getString(5));
-                        // grade는 DB에 char(2)("0"/"1")로 저장되지만 JoinBean.setGrade는 boolean을 받음
-                        bean.setGrade("1".equals(rs.getString(6)));
+                        bean.setGrade(rs.getString(6));
                     }
         		} catch (Exception e) {
         			e.printStackTrace();
@@ -78,7 +77,7 @@ public class GuestBookMgr {
     }
 
     //GB List(비밀글: 본인과 관리자만 볼 수 있다.)
-    public Vector<GuestBookBean> listGuestBooks(String id, String grade) {
+    public Vector<GuestBookBean> listGuestBook(String id, String grade) {
         Connection con = null;
         		PreparedStatement pstmt = null;
         		ResultSet rs = null;

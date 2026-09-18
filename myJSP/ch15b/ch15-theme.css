@@ -1,0 +1,67 @@
+/* ch15: 테마 변수 — data-ch15-theme 은 ch15-theme.js 에서 설정 */
+
+html[data-ch15-theme="soft"] {
+  --ch15-page: #1e293b;
+  --ch15-text: #e2e8f0;
+  --ch15-heading: #f8fafc;
+  --ch15-muted: #94a3b8;
+  --ch15-card: rgb(51 65 85 / 0.9);
+  --ch15-border: #475569;
+  --ch15-th-bg: rgb(71 85 105 / 0.85);
+  --ch15-th-text: #f1f5f9;
+  --ch15-row-hover: rgb(71 85 105 / 0.35);
+  --ch15-cell-muted: #94a3b8;
+  --ch15-input-bg: #0f172a;
+  --ch15-input-border: #64748b;
+  --ch15-label-bg: rgb(71 85 105 / 0.82);
+  --ch15-label-text: #f1f5f9;
+  --ch15-value-bg: rgb(15 23 42 / 0.4);
+  --ch15-comment-bg: rgb(15 23 42 / 0.45);
+  --ch15-chip-bg: rgb(71 85 105 / 0.75);
+  --ch15-chip-text: #e2e8f0;
+  --ch15-shadow: rgb(0 0 0 / 0.2);
+}
+
+html[data-ch15-theme="deep"] {
+  --ch15-page: #0f172a;
+  --ch15-text: #cbd5e1;
+  --ch15-heading: #f1f5f9;
+  --ch15-muted: #94a3b8;
+  --ch15-card: rgb(30 41 59 / 0.9);
+  --ch15-border: #334155;
+  --ch15-th-bg: rgb(51 65 85 / 0.8);
+  --ch15-th-text: #e2e8f0;
+  --ch15-row-hover: rgb(51 65 85 / 0.4);
+  --ch15-cell-muted: #94a3b8;
+  --ch15-input-bg: #020617;
+  --ch15-input-border: #475569;
+  --ch15-label-bg: rgb(51 65 85 / 0.8);
+  --ch15-label-text: #e2e8f0;
+  --ch15-value-bg: rgb(15 23 42 / 0.4);
+  --ch15-comment-bg: rgb(15 23 42 / 0.4);
+  --ch15-chip-bg: rgb(51 65 85 / 0.8);
+  --ch15-chip-text: #e2e8f0;
+  --ch15-shadow: rgb(0 0 0 / 0.25);
+}
+
+html[data-ch15-theme="light"] {
+  --ch15-page: #fffbeb;
+  --ch15-text: #334155;
+  --ch15-heading: #0f172a;
+  --ch15-muted: #64748b;
+  --ch15-card: rgb(255 255 255 / 0.95);
+  --ch15-border: #e2e8f0;
+  --ch15-th-bg: #e2e8f0;
+  --ch15-th-text: #334155;
+  --ch15-row-hover: rgb(254 243 199 / 0.6);
+  --ch15-cell-muted: #64748b;
+  --ch15-input-bg: #ffffff;
+  --ch15-input-border: #cbd5e1;
+  --ch15-label-bg: #e2e8f0;
+  --ch15-label-text: #334155;
+  --ch15-value-bg: #fffbeb;
+  --ch15-comment-bg: #f8fafc;
+  --ch15-chip-bg: #f1f5f9;
+  --ch15-chip-text: #1e293b;
+  --ch15-shadow: rgb(0 0 0 / 0.08);
+}

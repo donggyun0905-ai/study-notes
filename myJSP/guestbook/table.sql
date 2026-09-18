@@ -12,8 +12,8 @@ create table tblGuestBook(
 	id char(20) not null,
 	contents text,
 	ip char(15) not null,
-	regdate date,
-	regtime datetime,
+	regDate date,
+	regTime datetime,
 	secret char(2) default '0'
 );
 

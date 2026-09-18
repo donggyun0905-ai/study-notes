@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch15 JSP Board FlowChart</title>
+<script>!function(){var k='ch15-theme',o=['soft','deep','light'];var t=localStorage.getItem(k);if(o.indexOf(t)<0)t='soft';document.documentElement.setAttribute('data-ch15-theme',t);}();</script>
+<link href="ch15-theme.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+  .flow-svg {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 2px 20px rgba(0,0,0,0.3));
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  /* Dark mode color overrides for SVG */
+  .box-blue   { fill: #162d50; stroke: #3a7bd5; }
+  .box-teal   { fill: #0a3d30; stroke: #2ecc94; }
+  .box-purple { fill: #2a1f4e; stroke: #8b6fc0; }
+  .box-coral  { fill: #3d1e14; stroke: #e07850; }
+  .box-amber  { fill: #3a2a08; stroke: #d4a030; }
+  .box-red    { fill: #3a1212; stroke: #e05050; }
+  .box-pink   { fill: #3a1428; stroke: #d4537e; }
+  .box-gray   { fill: #2a2a2e; stroke: #6a6a70; }
+  .box-gray-dash { fill: #22222a; stroke: #5a5a66; stroke-dasharray: 6 3; }
+
+  .t-title  { fill: #e8e8f0; font-size: 14px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+  .t-sub    { fill: #9a9ab0; font-size: 12px; font-weight: 400; font-family: 'Noto Sans KR', sans-serif; }
+  .t-label  { fill: #8888a0; font-size: 12px; font-weight: 400; font-family: 'Noto Sans KR', sans-serif; }
+  .t-yes    { fill: #2ecc94; font-size: 12px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+  .t-no     { fill: #e05050; font-size: 12px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+  .t-redirect { fill: #2ecc94; font-size: 12px; font-weight: 400; font-family: 'Noto Sans KR', sans-serif; }
+  .t-section  { fill: #7878a0; font-size: 14px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+
+  .arr-default { stroke: #5a5a78; stroke-width: 1.5; }
+  .arr-teal    { stroke: #2ecc94; stroke-width: 1.5; }
+  .arr-blue    { stroke: #5a9ae0; stroke-width: 1.5; }
+  .arr-amber   { stroke: #d4a030; stroke-width: 1.5; }
+  .arr-green   { stroke: #2ecc94; stroke-width: 1.5; }
+  .arr-red     { stroke: #e05050; stroke-width: 1.5; }
+
+  .dash-line { stroke: #4a4a60; stroke-width: 0.5; stroke-dasharray: 4 3; }
+
+  .legend-title { fill: #c0c0d0; font-size: 13px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif; }
+  .legend-text  { fill: #9090a8; font-size: 11px; font-weight: 400; font-family: 'Noto Sans KR', sans-serif; }
+</style>
+</head>
+<body class="min-h-screen bg-[var(--ch15-page)] px-5 py-10 font-sans antialiased text-[var(--ch15-text)]">
+<div class="mx-auto w-full max-w-[820px]">
+<h1 class="mb-2 text-center text-[22px] font-bold tracking-tight text-[var(--ch15-heading)]">Ch15 · JSP Board FlowChart</h1>
+<p class="mb-8 text-center text-[13px] text-[var(--ch15-muted)]">JSP 게시판 페이지 흐름도 — post / list / read / update / reply / delete</p>
+
+<svg class="flow-svg" viewBox="0 0 680 1560" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrow-teal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#2ecc94" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#5a9ae0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#d4a030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#2ecc94" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+<marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="#e05050" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+
+<!-- ② post.jsp -->
+<rect class="box-teal" x="20" y="60" width="180" height="56" rx="8"/>
+<text class="t-title" x="110" y="82" text-anchor="middle" dominant-baseline="central">② post.jsp</text>
+<text class="t-sub" x="110" y="102" text-anchor="middle" dominant-baseline="central">글쓰기 폼</text>
+
+<!-- ① list.jsp -->
+<rect class="box-blue" x="240" y="60" width="200" height="56" rx="8"/>
+<text class="t-title" x="340" y="82" text-anchor="middle" dominant-baseline="central">① list.jsp</text>
+<text class="t-sub" x="340" y="102" text-anchor="middle" dominant-baseline="central">글목록 (페이징/검색)</text>
+
+<!-- list → post -->
+<line class="arr-teal" x1="240" y1="88" x2="200" y2="88" marker-end="url(#arrow-teal)"/>
+<text class="t-label" x="220" y="78" text-anchor="middle">글쓰기</text>
+
+<!-- list → read -->
+<line class="arr-default" x1="340" y1="116" x2="340" y2="175" marker-end="url(#arrow)"/>
+<text class="t-label" x="356" y="150" text-anchor="start">제목 클릭</text>
+
+<!-- post → BoardPostServlet -->
+<line class="arr-default" x1="110" y1="116" x2="110" y2="175" marker-end="url(#arrow)"/>
+<text class="t-label" x="126" y="150" text-anchor="start">submit</text>
+
+<!-- BoardPostServlet -->
+<rect class="box-teal" x="20" y="175" width="180" height="56" rx="8"/>
+<text class="t-title" x="110" y="197" text-anchor="middle" dominant-baseline="central">BoardPostServlet</text>
+<text class="t-sub" x="110" y="217" text-anchor="middle" dominant-baseline="central">파일업로드 + DB저장</text>
+
+<!-- BoardPostServlet → list.jsp -->
+<path d="M20 203 L8 203 L8 40 L340 40 L340 60" fill="none" class="arr-teal" marker-end="url(#arrow-teal)"/>
+<text class="t-redirect" x="170" y="34" text-anchor="middle">redirect → list.jsp</text>
+
+<!-- ③ read.jsp -->
+<rect class="box-purple" x="215" y="175" width="250" height="56" rx="8"/>
+<text class="t-title" x="340" y="197" text-anchor="middle" dominant-baseline="central">③ read.jsp</text>
+<text class="t-sub" x="340" y="217" text-anchor="middle" dominant-baseline="central">글읽기 (조회수↑, session저장)</text>
+
+<!-- read → download -->
+<line class="arr-blue" x1="465" y1="203" x2="520" y2="203" marker-end="url(#arrow-blue)"/>
+
+<!-- download.jsp -->
+<rect class="box-blue" x="520" y="175" width="140" height="56" rx="8"/>
+<text class="t-title" x="590" y="197" text-anchor="middle" dominant-baseline="central">download.jsp</text>
+<text class="t-sub" x="590" y="217" text-anchor="middle" dominant-baseline="central">첨부파일 다운로드</text>
+
+<!-- read → 댓글 -->
+<line class="arr-default" x1="340" y1="231" x2="340" y2="295" marker-end="url(#arrow)"/>
+
+<!-- 댓글 영역 -->
+<rect class="box-gray-dash" x="190" y="295" width="300" height="80" rx="8"/>
+<text class="t-title" x="340" y="320" text-anchor="middle" dominant-baseline="central">댓글 처리 (read.jsp 내부)</text>
+<text class="t-sub" x="340" y="343" text-anchor="middle" dominant-baseline="central">댓글등록 / 댓글삭제 → BCommentMgr</text>
+
+<!-- read.jsp 하단 버튼 -->
+<text class="t-section" x="340" y="410" text-anchor="middle" dominant-baseline="central">read.jsp 하단 버튼</text>
+<line class="dash-line" x1="80" y1="426" x2="600" y2="426"/>
+
+<text class="t-label" x="110" y="450" text-anchor="middle">리스트</text>
+<text class="t-label" x="280" y="450" text-anchor="middle">수정</text>
+<text class="t-label" x="430" y="450" text-anchor="middle">답변</text>
+<text class="t-label" x="575" y="450" text-anchor="middle">삭제</text>
+
+<line class="arr-default" x1="110" y1="456" x2="110" y2="496" marker-end="url(#arrow)"/>
+<line class="arr-default" x1="280" y1="456" x2="280" y2="496" marker-end="url(#arrow)"/>
+<line class="arr-default" x1="430" y1="456" x2="430" y2="496" marker-end="url(#arrow)"/>
+<line class="arr-default" x1="575" y1="456" x2="575" y2="496" marker-end="url(#arrow)"/>
+
+<!-- 리스트 → list.jsp -->
+<rect class="box-blue" x="40" y="496" width="140" height="44" rx="8"/>
+<text class="t-title" x="110" y="518" text-anchor="middle" dominant-baseline="central">list.jsp</text>
+
+<!-- ④ update.jsp -->
+<rect class="box-coral" x="200" y="496" width="160" height="56" rx="8"/>
+<text class="t-title" x="280" y="518" text-anchor="middle" dominant-baseline="central">④ update.jsp</text>
+<text class="t-sub" x="280" y="538" text-anchor="middle" dominant-baseline="central">수정 폼 (session)</text>
+
+<!-- ⑤ reply.jsp -->
+<rect class="box-amber" x="370" y="496" width="130" height="56" rx="8"/>
+<text class="t-title" x="435" y="518" text-anchor="middle" dominant-baseline="central">⑤ reply.jsp</text>
+<text class="t-sub" x="435" y="538" text-anchor="middle" dominant-baseline="central">답변 폼 (session)</text>
+
+<!-- ⑥ 삭제 -->
+<rect class="box-red" x="510" y="496" width="140" height="56" rx="8"/>
+<text class="t-title" x="580" y="518" text-anchor="middle" dominant-baseline="central">⑥ 삭제</text>
+<text class="t-sub" x="580" y="538" text-anchor="middle" dominant-baseline="central">비번입력 (read.jsp)</text>
+
+<!-- update → BoardUpdateServlet -->
+<line class="arr-default" x1="280" y1="552" x2="280" y2="606" marker-end="url(#arrow)"/>
+<text class="t-label" x="296" y="584" text-anchor="start">submit</text>
+
+<rect class="box-coral" x="190" y="606" width="180" height="56" rx="8"/>
+<text class="t-title" x="280" y="628" text-anchor="middle" dominant-baseline="central">BoardUpdateServlet</text>
+<text class="t-sub" x="280" y="648" text-anchor="middle" dominant-baseline="central">비번 검증 + 파일처리</text>
+
+<!-- reply → BoardReplyServlet -->
+<line class="arr-default" x1="435" y1="552" x2="435" y2="606" marker-end="url(#arrow)"/>
+<text class="t-label" x="451" y="584" text-anchor="start">submit</text>
+
+<rect class="box-amber" x="370" y="606" width="160" height="56" rx="8"/>
+<text class="t-title" x="450" y="628" text-anchor="middle" dominant-baseline="central">BoardReplyServlet</text>
+<text class="t-sub" x="450" y="648" text-anchor="middle" dominant-baseline="central">ref/pos/depth 처리</text>
+
+<!-- delete → BoardDeleteServlet -->
+<line class="arr-default" x1="580" y1="552" x2="580" y2="606" marker-end="url(#arrow)"/>
+<text class="t-label" x="596" y="584" text-anchor="start">delFn()</text>
+
+<rect class="box-red" x="510" y="606" width="160" height="56" rx="8"/>
+<text class="t-title" x="590" y="628" text-anchor="middle" dominant-baseline="central">BoardDeleteServlet</text>
+<text class="t-sub" x="590" y="648" text-anchor="middle" dominant-baseline="central">비번 검증 + 삭제</text>
+
+<!-- ===== 비번 검증 (Update) ===== -->
+<line class="arr-default" x1="280" y1="662" x2="280" y2="716" marker-end="url(#arrow)"/>
+
+<rect class="box-gray" x="215" y="716" width="130" height="40" rx="20"/>
+<text class="t-title" x="280" y="736" text-anchor="middle" dominant-baseline="central">비번 일치?</text>
+
+<line class="arr-green" x1="215" y1="736" x2="130" y2="736" marker-end="url(#arrow-green)"/>
+<text class="t-yes" x="170" y="726" text-anchor="middle">Yes</text>
+
+<rect class="box-teal" x="30" y="716" width="100" height="40" rx="8"/>
+<text class="t-title" x="80" y="736" text-anchor="middle" dominant-baseline="central">read.jsp</text>
+
+<line class="arr-red" x1="280" y1="756" x2="280" y2="806" marker-end="url(#arrow-red)"/>
+<text class="t-no" x="296" y="784" text-anchor="start">No</text>
+
+<rect class="box-red" x="205" y="806" width="150" height="44" rx="8"/>
+<text class="t-title" x="280" y="822" text-anchor="middle" dominant-baseline="central">alert + back()</text>
+<text class="t-sub" x="280" y="838" text-anchor="middle" dominant-baseline="central">비번 불일치</text>
+
+<!-- ===== 비번 검증 (Delete) ===== -->
+<line class="arr-default" x1="590" y1="662" x2="590" y2="716" marker-end="url(#arrow)"/>
+
+<rect class="box-gray" x="525" y="716" width="130" height="40" rx="20"/>
+<text class="t-title" x="590" y="736" text-anchor="middle" dominant-baseline="central">비번 일치?</text>
+
+<path d="M655 736 L666 736 L666 886 L348 886" fill="none" class="arr-green" marker-end="url(#arrow-green)"/>
+<text class="t-yes" x="666" y="726" text-anchor="start">Yes</text>
+
+<line class="arr-red" x1="590" y1="756" x2="590" y2="806" marker-end="url(#arrow-red)"/>
+<text class="t-no" x="606" y="784" text-anchor="start">No</text>
+
+<rect class="box-red" x="515" y="806" width="150" height="44" rx="8"/>
+<text class="t-title" x="590" y="822" text-anchor="middle" dominant-baseline="central">alert + back()</text>
+<text class="t-sub" x="590" y="838" text-anchor="middle" dominant-baseline="central">비번 불일치</text>
+
+<!-- Reply → list.jsp -->
+<path d="M450 662 L450 886 L348 886" fill="none" class="arr-amber" marker-end="url(#arrow-amber)"/>
+<text class="t-label" x="456" y="876" text-anchor="start" fill="#d4a030">redirect</text>
+
+<!-- 도착: list.jsp -->
+<rect class="box-blue" x="265" y="866" width="150" height="44" rx="8"/>
+<text class="t-title" x="340" y="888" text-anchor="middle" dominant-baseline="central">① list.jsp</text>
+
+<!-- ===== Model 레이어 ===== -->
+<line class="arr-default" x1="340" y1="910" x2="340" y2="960" marker-end="url(#arrow)"/>
+
+<rect class="box-gray-dash" x="60" y="960" width="560" height="200" rx="12"/>
+<text class="t-title" x="340" y="985" text-anchor="middle" dominant-baseline="central">Model 레이어 (Java Beans + Mgr)</text>
+
+<rect class="box-purple" x="90" y="1010" width="200" height="56" rx="8"/>
+<text class="t-title" x="190" y="1032" text-anchor="middle" dominant-baseline="central">BoardMgr</text>
+<text class="t-sub" x="190" y="1052" text-anchor="middle" dominant-baseline="central">CRUD + 파일 + 답변</text>
+
+<rect class="box-purple" x="320" y="1010" width="200" height="56" rx="8"/>
+<text class="t-title" x="420" y="1032" text-anchor="middle" dominant-baseline="central">BCommentMgr</text>
+<text class="t-sub" x="420" y="1052" text-anchor="middle" dominant-baseline="central">댓글 CRUD</text>
+
+<rect class="box-pink" x="90" y="1090" width="120" height="40" rx="8"/>
+<text class="t-title" x="150" y="1110" text-anchor="middle" dominant-baseline="central">BoardBean</text>
+
+<rect class="box-pink" x="240" y="1090" width="140" height="40" rx="8"/>
+<text class="t-title" x="310" y="1110" text-anchor="middle" dominant-baseline="central">BCommentBean</text>
+
+<rect class="box-gray" x="410" y="1090" width="110" height="40" rx="8"/>
+<text class="t-title" x="465" y="1110" text-anchor="middle" dominant-baseline="central">UtilMgr</text>
+
+<!-- DBConnectionMgr -->
+<line class="arr-default" x1="340" y1="1160" x2="340" y2="1210" marker-end="url(#arrow)"/>
+
+<rect class="box-teal" x="210" y="1210" width="260" height="56" rx="8"/>
+<text class="t-title" x="340" y="1232" text-anchor="middle" dominant-baseline="central">DBConnectionMgr</text>
+<text class="t-sub" x="340" y="1252" text-anchor="middle" dominant-baseline="central">커넥션 풀 (싱글턴)</text>
+
+<line class="arr-default" x1="340" y1="1266" x2="340" y2="1320" marker-end="url(#arrow)"/>
+
+<!-- MySQL -->
+<rect class="box-blue" x="220" y="1320" width="240" height="56" rx="8"/>
+<text class="t-title" x="340" y="1342" text-anchor="middle" dominant-baseline="central">MySQL (mydb)</text>
+<text class="t-sub" x="340" y="1362" text-anchor="middle" dominant-baseline="central">tblBoard + tblBComment</text>
+
+<!-- ===== 범례 ===== -->
+<g transform="translate(60, 1430)">
+<text class="legend-title" x="0" y="14" dominant-baseline="central">범례</text>
+
+<rect class="box-blue" x="0" y="30" width="18" height="18" rx="3"/>
+<text class="legend-text" x="26" y="43">JSP 페이지</text>
+
+<rect class="box-teal" x="130" y="30" width="18" height="18" rx="3"/>
+<text class="legend-text" x="156" y="43">Servlet</text>
+
+<rect class="box-purple" x="240" y="30" width="18" height="18" rx="3"/>
+<text class="legend-text" x="266" y="43">Model (Mgr)</text>
+
+<rect class="box-coral" x="370" y="30" width="18" height="18" rx="3"/>
+<text class="legend-text" x="396" y="43">수정 흐름</text>
+
+<rect class="box-amber" x="480" y="30" width="18" height="18" rx="3"/>
+<text class="legend-text" x="506" y="43">답변 흐름</text>
+
+<rect class="box-red" x="0" y="60" width="18" height="18" rx="3"/>
+<text class="legend-text" x="26" y="73">삭제 / 비번 불일치</text>
+
+<rect class="box-pink" x="200" y="60" width="18" height="18" rx="3"/>
+<text class="legend-text" x="226" y="73">Bean (VO)</text>
+
+<rect class="box-gray" x="330" y="60" width="18" height="18" rx="3"/>
+<text class="legend-text" x="356" y="73">유틸 / 판단</text>
+</g>
+
+</svg>
+</div>
+<script src="ch15-theme.js"></script>
+</body>
+</html>

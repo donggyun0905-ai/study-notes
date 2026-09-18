@@ -1,0 +1,31 @@
+td {
+	width: 180px;
+	height: 70px;
+	color: black;
+}
+
+h2 {
+	background: salmon;
+	align-self: center;
+	margin: 10px;
+	font-family: 'Nerko One', cursive;
+	color: BlanchedAlmond;
+}
+
+h2:hover {
+	color: red;
+	transition: 0.1s;
+	font-size: 70px;
+}
+
+body {
+	font-family: 'Nerko One', cursive;
+	font-size: 40px;
+	color: blue;
+}
+
+footer {
+	margin:0 auto; 
+    text-align:center;
+    color: RebeccaPurple;
+    font-size: 80px;}
