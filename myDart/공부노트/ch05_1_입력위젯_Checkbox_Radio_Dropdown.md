@@ -100,7 +100,7 @@ print(controller.text);                       // ③ 값 읽기
 ## 3. Checkbox / Switch — main1.dart
 
 ```dart
-class _State extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
 
   bool isChecked = false;              // ① 상태 변수
 
@@ -193,9 +193,9 @@ onChanged: (bool? value){      // 받는 값은 null 가능
 
 ```dart
 //라디오 버튼의 선택 값으로 사용할 열거형
-enum Gender { MAN, WOMAN }      // ★ 클래스 밖에 선언
+enum Gender {MAN, WOMEN}        // ★ 클래스 밖에 선언
 
-class _State extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
 
   Gender gender = Gender.MAN;   // 상태 변수 (초기 선택값)
 
@@ -223,7 +223,7 @@ class _State extends State<MyApp> {
                     ListTile(
                       title:Text('여자'),
                       leading: Radio(
-                        value:Gender.WOMAN,
+                        value:Gender.WOMEN,
                         groupValue: gender,
                         onChanged: (Gender? value){
                           setState((){ gender = value!; });
@@ -253,7 +253,7 @@ class _State extends State<MyApp> {
 ```
 gender = Gender.MAN  일 때
   남자 버튼: value(MAN)   == groupValue(MAN)  →  ● 선택됨
-  여자 버튼: value(WOMAN) != groupValue(MAN)  →  ○ 안 됨
+  여자 버튼: value(WOMEN) != groupValue(MAN)  →  ○ 안 됨
 ```
 
 **여러 버튼을 같은 `groupValue` 변수에 연결하는 것만으로 "하나만 선택"이 구현**됩니다.
@@ -266,10 +266,10 @@ gender = Gender.MAN  일 때
 ### enum (열거형)이란
 
 ```dart
-enum Gender { MAN, WOMAN }
+enum Gender {MAN, WOMEN}
 ```
 
-**정해진 값만 담을 수 있는 타입.** `String gender = '남자';`로 해도 되지만, 오타('남성', 'man')가 나도 컴파일러가 못 잡습니다. enum을 쓰면 `Gender.MAN` / `Gender.WOMAN` 외엔 쓸 수 없어 **오타가 컴파일 단계에서 걸립니다.**
+**정해진 값만 담을 수 있는 타입.** `String gender = '남자';`로 해도 되지만, 오타('남성', 'man')가 나도 컴파일러가 못 잡습니다. enum을 쓰면 `Gender.MAN` / `Gender.WOMEN` 외엔 쓸 수 없어 **오타가 컴파일 단계에서 걸립니다.**
 
 > enum은 **클래스 밖(파일 최상단)**에 선언합니다. 클래스 안에 넣으면 에러.
 
@@ -279,11 +279,46 @@ enum Gender { MAN, WOMAN }
 
 > `ListTile`의 `onTap`에도 같은 `setState`를 넣으면 글자를 눌러도 선택됩니다.
 
+### ★ RadioListTile — 둘을 합친 위젯 (더 간단함)
+
+`ListTile` + `Radio` 조합을 Flutter가 미리 합쳐둔 위젯이 있습니다.
+
+```dart
+RadioListTile(
+    title: Text('남자'),
+    value: Gender.MAN,
+    groupValue: gender,
+    onChanged: (Gender? value){
+      setState(() {
+        gender = value!;
+      });
+  },
+),
+```
+
+| | `ListTile` + `Radio` | `RadioListTile` |
+|---|---|---|
+| 중첩 깊이 | 2단 (감싸야 함) | **1단** |
+| 글자를 눌러도 선택 | `onTap` 직접 추가해야 함 | **기본 동작** |
+| 라디오 위치 | `leading`/`trailing` 자유 | `controlAffinity`로 지정 |
+
+```dart
+RadioListTile(
+  controlAffinity: ListTileControlAffinity.trailing,   // 라디오를 오른쪽으로
+  ...
+)
+```
+
+**실무에서는 `RadioListTile`을 씁니다.** `ListTile` + `Radio`는 "둘이 어떻게 조합되는지" 이해하기 위한 과정입니다.
+`CheckboxListTile`, `SwitchListTile`도 같은 방식으로 존재합니다.
+
+> `main2.dart`는 위쪽에 `ListTile`+`Radio` 2개, 아래쪽에 `RadioListTile` 2개를 두고 **같은 `gender` 변수를 공유**합니다. 그래서 위에서 '여자'를 고르면 아래 것도 같이 '여자'로 바뀝니다 — 상태가 화면의 원천임을 보여주는 좋은 비교 예제입니다.
+
 ### 오늘 겪은 에러 3건
 
 | 원인 | 해결 |
 |---|---|
-| `enum Gender`를 정의하지 않고 사용 | `enum Gender { MAN, WOMAN }` 추가 |
+| `enum Gender`를 정의하지 않고 사용 | `enum Gender {MAN, WOMEN}` 추가 |
 | `gender = value;` (`Gender?` → `Gender`) | `gender = value!;` |
 | 두 번째 라벨이 복붙으로 '남자' | '여자'로 수정 |
 
